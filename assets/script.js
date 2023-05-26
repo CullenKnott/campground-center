@@ -1,8 +1,5 @@
 var myDiv = document.getElementById('myDiv')
 
-
-
-
 function renderCamps(campName, description, link) {
    
     var div = `<div class="row">
@@ -33,3 +30,15 @@ renderCamps('mycamp', 'sdfasdfasdfasdf', 'google')
 //loop through data
 
 //renderCamp with data
+"developer.nps.gov/api/v1/campgrounds?q=test&api_key=sM8twcHp55GYlyfrURIQHjdmfOQ6au6qTedVbSya"
+
+document.querySelector(".search").addEventListener("click", function(){
+    var search = document.querySelector(".autocomplete").value
+    var url = "https://developer.nps.gov/api/v1/campgrounds?q="+search+"&api_key=sM8twcHp55GYlyfrURIQHjdmfOQ6au6qTedVbSya"
+    fetch(url)
+    .then(function(res){
+        return res.json()
+    }).then(function(data){
+        console.log(data)
+    })
+})
