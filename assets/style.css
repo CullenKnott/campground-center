@@ -11,3 +11,12 @@
   color: aliceblue;
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
+
+
+.currentWeather {
+  position: absolute;
+  left: auto;
+  right: 50%;
+
+  
+}
