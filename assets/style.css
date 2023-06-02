@@ -21,3 +21,10 @@
   
 }
 
+#sortable {
+  padding: 3px;
+  margin: 10px;
+  display: inline-block;
+  color: white;
+  border-radius: 10px;  
+}

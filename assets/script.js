@@ -66,14 +66,12 @@ document.querySelector(".search").addEventListener("click", apiCall, clearResult
 
 function apiCall() {
   var search = document.querySelector(".autocomplete").value;
-
   var apiKey = "e58651ace7cb758478db04f768206e08";
   var queryURL =
     "http://api.openweathermap.org/data/2.5/weather?units=imperial&q=" +
     search +
     "&appid=" +
     apiKey + "&units=imperial";
-
   campgroundData(search);
   
 
@@ -92,6 +90,7 @@ function apiCall() {
     });
 
     saveCityHistory(search);
+    renderSearchHistory();
 }
 
 function saveCityHistory(){
@@ -100,23 +99,27 @@ function saveCityHistory(){
   if (actualCity !== '') {
     var cityHistory =
       JSON.parse(window.localStorage.getItem('cityHistory')) || [];
-    var newsavedCity = {
-      city: actualCity,
-    };
-    cityHistory.push(newsavedCity);
+    cityHistory.push(actualCity);
     window.localStorage.setItem('cityHistory', JSON.stringify(cityHistory));
   }
 }
 
 function renderSearchHistory(){
-  var cityHistory = JSON.parse(window.localStorage.getItem('cityHistory')) || [];
-     var liTag = document.createElement('li');
-    liTag.textContent = shownScores[i].name + ' - ' + shownScores[i].score;  
-    var olEl = document.getElementById('scores');
-    olEl.appendChild(liTag);
-  }
+  var cityHistory = JSON.parse(window.localStorage.getItem('cityHistory'))
+  var historyEl = document.querySelector("#sortable"); 
+  historyEl.innerHTML = ''
+  for (var i = 0; i < cityHistory.length; i++) {
+    console.log(cityHistory[i])    
+      var displayedHistory = cityHistory[i];
+      var listHistory = document.createElement('li');
+      listHistory.textContent = displayedHistory
+      listHistory.setAttribute('id', `list${i}`);  
+      listHistory.setAttribute('class', 'card-panel teal lighten-2')   
+      // historyEl.appendChild(displayedHistory);
+      historyEl.appendChild(listHistory);
+  }}
 
-}
+renderSearchHistory()
 
 
 function weathernametemp(data) {
@@ -126,7 +129,7 @@ function weathernametemp(data) {
 
 var actualTemp = data.main.temp;
 var tempElement = document.querySelector(".weatherCardTemp");
-tempElement.textContent= "Tempature is " + actualTemp;
+tempElement.textContent= "Temperature is " + actualTemp;
 
 
 
