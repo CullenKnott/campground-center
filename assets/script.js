@@ -97,9 +97,8 @@ function apiCall() {
 }
 function weathernametemp(data) {
   var weatherCityName = data.name;
-  var cityNameelement = document.querySelector(".weatherCardCityName");
-  cityNameelement.textContent =
-    "10 Campgrounds locations in the city of " + weatherCityName;
+  var cityNameelement = document.querySelector(".weatherCardCityName")
+  cityNameelement.textContent = "10 Campground locations in the city of "+ weatherCityName;
   var actualTemp = data.main.temp;
   var tempElement = document.querySelector(".weatherCardTemp");
   tempElement.textContent =
