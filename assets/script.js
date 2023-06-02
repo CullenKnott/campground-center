@@ -6,15 +6,15 @@ function clearResults() {
   while (myDiv.firstChild) {
     myDiv.removeChild(myDiv.firstChild);
   }
-};
+}
 
 function renderCamps(data) {
-  console.log(data)
+  console.log(data);
   var campName = data.name;
   var description = data.description;
   var link = data.reservationUrl;
-  var amenities = 'test';
-  var fees = 'test';
+  var amenities = "test";
+  var fees = "test";
 
   var div = `<div class="row">
     <div class="col s12 m3">
@@ -42,21 +42,18 @@ function renderCamps(data) {
     </div>
   </div>`;
 
-  counter++
+  counter++;
 
   myDiv.innerHTML += div;
 }
 
 // triggers the modal for its specified card
 function modalclickhandler() {
-    var elems = document.querySelectorAll(".modal");
-    var instances = M.Modal.init(elems);
+  var elems = document.querySelectorAll(".modal");
+  var instances = M.Modal.init(elems);
 }
 
-
-function renderWeather() {
-
-}
+function renderWeather() {}
 
 //fetch data
 
@@ -64,22 +61,22 @@ function renderWeather() {
 
 //renderCamp with data
 
-
-
 ("developer.nps.gov/api/v1/campgrounds?q=test&api_key=sM8twcHp55GYlyfrURIQHjdmfOQ6au6qTedVbSya");
 
-document.querySelector(".search").addEventListener("click", apiCall, clearResults);
+document
+  .querySelector(".search")
+  .addEventListener("click", apiCall, clearResults);
 
 function apiCall() {
   var search = document.querySelector(".autocomplete").value;
   var apiKey = "e58651ace7cb758478db04f768206e08";
   var queryURL =
-    "http://api.openweathermap.org/data/2.5/weather?units=imperial&q=" +
+    "https://api.openweathermap.org/data/2.5/weather?units=imperial&q=" +
     search +
     "&appid=" +
-    apiKey + "&units=imperial";
+    apiKey +
+    "&units=imperial";
   campgroundData(search);
-  
 
   getWeatherdata(queryURL)
     .then(function (response) {
@@ -89,57 +86,52 @@ function apiCall() {
     .then(function (data) {
       //var clouds = data.clouds.all;
       console.log(data);
-     // var display = document.querySelector('#displayTemp');
-     // var temperature = data.main.temp
+      // var display = document.querySelector('#displayTemp');
+      // var temperature = data.main.temp
       //display.textContent = temperature
       weathernametemp(data);
-
     });
 
-    saveCityHistory(search);
-    renderSearchHistory();
+  saveCityHistory(search);
+  renderSearchHistory();
 }
 function weathernametemp(data) {
   var weatherCityName = data.name;
-  var cityNameelement = document.querySelector(".weatherCardCityName")
-  cityNameelement.textContent = "10 Campgrounds locations in the city of "+ weatherCityName;
+  var cityNameelement = document.querySelector(".weatherCardCityName");
+  cityNameelement.textContent =
+    "10 Campgrounds locations in the city of " + weatherCityName;
   var actualTemp = data.main.temp;
-  var tempElement = document.querySelector(".weatherCardTemp")
-  tempElement.textContent= "Temperature in " + weatherCityName + " is currently " + actualTemp + "°F ";  
+  var tempElement = document.querySelector(".weatherCardTemp");
+  tempElement.textContent =
+    "Temperature in " + weatherCityName + " is currently " + actualTemp + "°F ";
 }
 
-
-function saveCityHistory(){
-  var searchedCity = document.querySelector(".autocomplete")
+function saveCityHistory() {
+  var searchedCity = document.querySelector(".autocomplete");
   var actualCity = searchedCity.value.trim();
-  if (actualCity !== '') {
+  if (actualCity !== "") {
     var cityHistory =
-      JSON.parse(window.localStorage.getItem('cityHistory')) || [];
+      JSON.parse(window.localStorage.getItem("cityHistory")) || [];
     cityHistory.push(actualCity);
-    window.localStorage.setItem('cityHistory', JSON.stringify(cityHistory));
+    window.localStorage.setItem("cityHistory", JSON.stringify(cityHistory));
   }
 }
 
-function renderSearchHistory(){
-  var cityHistory = JSON.parse(window.localStorage.getItem('cityHistory'))
-  var historyEl = document.querySelector("#sortable"); 
-  historyEl.innerHTML = ''
+function renderSearchHistory() {
+  var cityHistory = JSON.parse(window.localStorage.getItem("cityHistory"));
+  var historyEl = document.querySelector("#sortable");
+  historyEl.innerHTML = "";
   for (var i = 0; i < cityHistory.length; i++) {
-    console.log(cityHistory[i])    
-      var displayedHistory = cityHistory[i];
-      var listHistory = document.createElement('li');
-      listHistory.textContent = displayedHistory
-      listHistory.setAttribute('id', `list${i}`);  
-      listHistory.setAttribute('class', 'card-panel teal lighten-2')   
-      // historyEl.appendChild(displayedHistory);
-      historyEl.appendChild(listHistory);
-  }}
-
-renderSearchHistory()
-
-
-
-
+    console.log(cityHistory[i]);
+    var displayedHistory = cityHistory[i];
+    var listHistory = document.createElement("li");
+    listHistory.textContent = displayedHistory;
+    listHistory.setAttribute("id", `list${i}`);
+    listHistory.setAttribute("class", "card-panel teal lighten-2");
+    // historyEl.appendChild(displayedHistory);
+    historyEl.appendChild(listHistory);
+  }
+}
 
 function getWeatherdata(url) {
   var response = fetch(url);
@@ -159,7 +151,7 @@ function campgroundData(search) {
       console.log(data);
 
       for (var i = 0; i < data.data.length; i++) {
-        renderCamps(data.data[i])
+        renderCamps(data.data[i]);
       }
     });
 }
@@ -185,5 +177,3 @@ getWeatherdata(queryURL).then(function (response) {
   console.log(data);
 });
 //  https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key} */
-
-
