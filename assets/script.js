@@ -35,12 +35,6 @@ renderCamps("mycamp", "sdfasdfasdfasdf", "google");
 
 function renderWeather() {}
 
-//fetch data
-
-//loop through data
-
-//renderCamp with data
-
 document.addEventListener("DOMContentLoaded", function () {
   var elems = document.querySelectorAll(".modal");
   var instances = M.Modal.init(elems);
@@ -91,25 +85,3 @@ function campgroundData(search) {
       console.log(data);
     });
 }
-
-// weather API
-// API KEY: e58651ace7cb758478db04f768206e08
-/*
-var apiKey = "e58651ace7cb758478db04f768206e08";
-var search = "Los Angeles";
-var queryURL =
-  "http://api.openweathermap.org/data/2.5/weather?q=" +
-  search +
-  "&appid=" +
-  apiKey;
-
-function getWeatherdata(url) {
-  var response = fetch(url);
-  return response;
-}
-
-getWeatherdata(queryURL).then(function (response) {
-  var data = response.json();
-  console.log(data);
-});
-//  https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key} */

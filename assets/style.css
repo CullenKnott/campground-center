@@ -9,6 +9,8 @@ header#banner {
 
 #bannerTitle {
   text-align: center;
+  font-size: 90px;
+  text-shadow: 4px 4px black;
   font-weight: bold;
   color: aliceblue;
   font-family: Georgia, "Times New Roman", Times, serif;
