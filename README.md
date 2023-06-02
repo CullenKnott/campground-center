@@ -23,10 +23,13 @@ This campground website is designed to provide information about campsites withi
 If your README is long, add a table of contents to make it easy for users to find what they need.
 
 
+- [Installation](#installation)
 - [Usage](#usage)
 - [Credits](#credits)
 - [License](#license)
 
+
+## Installation
 
 
 ## Usage

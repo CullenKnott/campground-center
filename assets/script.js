@@ -177,3 +177,10 @@ getWeatherdata(queryURL).then(function (response) {
   console.log(data);
 });
 //  https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key} */
+
+// figure out how the api works to extract the url from data
+// if we can retrieve the link in the data
+// variable 
+// href is equal to data. <a href="#">${link}</a>
+//  <a href="#">${link}</a> change to view campground site
+//  <a href="${link}" target = "_blank">Campsite</a>
