@@ -83,15 +83,25 @@ function apiCall() {
     .then(function (data) {
       //var clouds = data.clouds.all;
       console.log(data);
-      var display = document.querySelector('#displayTemp');
-      var temperature = data.main.temp
-      display.textContent = temperature
-      renderWeather(data);
+     // var display = document.querySelector('#displayTemp');
+     // var temperature = data.main.temp
+      //display.textContent = temperature
+      weathernametemp(data);
+
     });
 
     saveCityHistory(search);
     renderSearchHistory();
 }
+function weathernametemp(data) {
+  var weatherCityName = data.name;
+  var cityNameelement = document.querySelector(".weatherCardCityName")
+  cityNameelement.textContent = "10 Campgrounds locations in the city of "+ weatherCityName;
+  var actualTemp = data.main.temp;
+  var tempElement = document.querySelector(".weatherCardTemp")
+  tempElement.textContent= "Temperature in " + weatherCityName + " is currently " + actualTemp + "°F ";  
+}
+
 
 function saveCityHistory(){
   var searchedCity = document.querySelector(".autocomplete")
@@ -122,18 +132,6 @@ function renderSearchHistory(){
 renderSearchHistory()
 
 
-function weathernametemp(data) {
-  var weatherCityName = data.name;
-  var cityNameelement = document.querySelector(".weatherCardCityName")
-  cityNameelement.textContent = "City: "+ weatherCityName;
-
-var actualTemp = data.main.temp;
-var tempElement = document.querySelector(".weatherCardTemp");
-tempElement.textContent= "Temperature is " + actualTemp;
-
-
-
-}
 
 
 
