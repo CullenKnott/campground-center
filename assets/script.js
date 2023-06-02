@@ -72,9 +72,10 @@ function apiCall() {
     "http://api.openweathermap.org/data/2.5/weather?units=imperial&q=" +
     search +
     "&appid=" +
-    apiKey;
+    apiKey + "&units=imperial";
 
   campgroundData(search);
+  
 
   getWeatherdata(queryURL)
     .then(function (response) {
@@ -89,7 +90,49 @@ function apiCall() {
       display.textContent = temperature
       renderWeather(data);
     });
+
+    saveCityHistory(search);
 }
+
+function saveCityHistory(){
+  var searchedCity = document.querySelector(".autocomplete")
+  var actualCity = searchedCity.value.trim();
+  if (actualCity !== '') {
+    var cityHistory =
+      JSON.parse(window.localStorage.getItem('cityHistory')) || [];
+    var newsavedCity = {
+      city: actualCity,
+    };
+    cityHistory.push(newsavedCity);
+    window.localStorage.setItem('cityHistory', JSON.stringify(cityHistory));
+  }
+}
+
+function renderSearchHistory(){
+  var cityHistory = JSON.parse(window.localStorage.getItem('cityHistory')) || [];
+     var liTag = document.createElement('li');
+    liTag.textContent = shownScores[i].name + ' - ' + shownScores[i].score;  
+    var olEl = document.getElementById('scores');
+    olEl.appendChild(liTag);
+  }
+
+}
+
+
+function weathernametemp(data) {
+  var weatherCityName = data.name;
+  var cityNameelement = document.querySelector(".weatherCardCityName")
+  cityNameelement.textContent = "City: "+ weatherCityName;
+
+var actualTemp = data.main.temp;
+var tempElement = document.querySelector(".weatherCardTemp");
+tempElement.textContent= "Tempature is " + actualTemp;
+
+
+
+}
+
+
 
 function getWeatherdata(url) {
   var response = fetch(url);
@@ -107,6 +150,7 @@ function campgroundData(search) {
     })
     .then(function (data) {
       console.log(data);
+
       for (var i = 0; i < data.data.length; i++) {
         renderCamps(data.data[i].name, data.data[i].description)
       }
@@ -134,3 +178,37 @@ getWeatherdata(queryURL).then(function (response) {
   console.log(data);
 });
 //  https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key} */
+
+function renderCamps(campName, description, link, amenities, fees) {
+  var div = `<div class="row">
+    <div class="col s12 m3">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">${campName}</span>
+          <p>${description}</p>
+        </div>
+        <div class="card-action">
+          <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Info</a>
+          <a href="#">${link}</a>
+        </div>
+        <div id="modal1" class="modal" tabindex="0" style="z-index: 1003; display: none; opacity: 0; top: 4%; transform: scaleX(0.8) scaleY(0.8);">
+          <div class="modal-content">
+            <h4>Modal Header</h4>
+            <p>
+              Amenities: ${amenities}, Fees: ${fees}, 
+            </p>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+
+  myDiv.innerHTML += div;
+}
+
+
+
+

@@ -11,12 +11,22 @@
     <title>Campground-Center</title>
   </head>
   <!-- Header section for background image -->
-  <header id="banner" class="container">
+  <header class=" banner">    
     <h1 id="bannerTitle">Campground-Center</h1>
   </header>
 
+  <div class="row s12 m7 currentWeather">
+    <div class="col s12 m7">
+      <div class="card-panel teal currentWeather">
+        <h1 class="white-text weatherCardCityName">
+        </h1>
+        <h3 class='weatherCardTemp'></h3>   
+      </div>
+    </div>
+  </div>
+
   <body>
-    <div class="row">
+    <div class="row ">
       <div class="col s5">
         <div class="row">
           <div class="input-field col s6">
@@ -27,16 +37,41 @@
         </div>
       </div>
     </div>
+
+    <div class="searchHistory">
+      <a class="waves-effect waves-light btn-small searchHistory">Button</a>
+      <ul id="sortable">
+        <li class="hisory"></li>
+        <li class="hisory"></li>
+        <li class="hisory"></li>
+        <li class="hisory"></li>
+        <li class="hisory"></li>
+      </ul>
+    </div>
+
+
+        
     <main>
       <h2 id="displayTemp"></h2>
 
       <div id="myDiv"></div>
+
+
     </main>
+
 
     <!-- Aside section where top 10 will populate -->
 
     <!-- Materialize Script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+      $( function() {
+        $( "#sortable" ).sortable();
+      } );
+      </script>
+  
     <script src="./assets/script.js"></script>
   </body>
 
