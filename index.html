@@ -11,7 +11,7 @@
     <title>Campground-Center</title>
   </head>
   <!-- Header section for background image -->
-  <header id="banner" class="container">
+  <header class=" banner">    
     <h1 id="bannerTitle">Campground-Center</h1>
   </header>
 
@@ -37,6 +37,20 @@
         </div>
       </div>
     </div>
+
+    <div class="searchHistory">
+      <a class="waves-effect waves-light btn-small searchHistory">Button</a>
+      <ul id="sortable">
+        <li class="hisory"></li>
+        <li class="hisory"></li>
+        <li class="hisory"></li>
+        <li class="hisory"></li>
+        <li class="hisory"></li>
+      </ul>
+    </div>
+
+
+        
     <main>
       <div id="myDiv"></div>
 
@@ -44,13 +58,18 @@
     </main>
 
 
-
-
-
     <!-- Aside section where top 10 will populate -->
 
     <!-- Materialize Script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+      $( function() {
+        $( "#sortable" ).sortable();
+      } );
+      </script>
+  
     <script src="./assets/script.js"></script>
   </body>
 

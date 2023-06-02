@@ -1,8 +1,8 @@
 var myDiv = document.getElementById("myDiv");
 
 
-renderCamps("Hello", "sdfasdfasdfasdf", "google");
-renderCamps("mycamp", "sdfasdfasdfasdf", "google");
+//renderCamps("Hello", "sdfasdfasdfasdf", "google");
+//renderCamps("mycamp", "sdfasdfasdfasdf", "google");
 
 function renderWeather() {}
 
@@ -32,6 +32,7 @@ function apiCall() {
     apiKey + "&units=imperial";
 
   campgroundData(search);
+  
 
   getWeatherdata(queryURL)
     .then(function (response) {
@@ -45,7 +46,33 @@ function apiCall() {
       weathernametemp(data)
     });
 
+    saveCityHistory(search);
 }
+
+function saveCityHistory(){
+  var searchedCity = document.querySelector(".autocomplete")
+  var actualCity = searchedCity.value.trim();
+  if (actualCity !== '') {
+    var cityHistory =
+      JSON.parse(window.localStorage.getItem('cityHistory')) || [];
+    var newsavedCity = {
+      city: actualCity,
+    };
+    cityHistory.push(newsavedCity);
+    window.localStorage.setItem('cityHistory', JSON.stringify(cityHistory));
+  }
+}
+
+function renderSearchHistory(){
+  var cityHistory = JSON.parse(window.localStorage.getItem('cityHistory')) || [];
+     var liTag = document.createElement('li');
+    liTag.textContent = shownScores[i].name + ' - ' + shownScores[i].score;  
+    var olEl = document.getElementById('scores');
+    olEl.appendChild(liTag);
+  }
+
+}
+
 
 function weathernametemp(data) {
   var weatherCityName = data.name;
@@ -133,3 +160,7 @@ function renderCamps(campName, description, link, amenities, fees) {
 
   myDiv.innerHTML += div;
 }
+
+
+
+
