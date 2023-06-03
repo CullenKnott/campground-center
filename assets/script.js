@@ -1,22 +1,20 @@
 var myDiv = document.getElementById("myDiv");
 var counter = 1;
 
-function clearResults() {
-  // Remove all child elements from the container
-  while (myDiv.firstChild) {
-    myDiv.removeChild(myDiv.firstChild);
-  }
-}
-
+// appends the information by applying the specified data to the card and modal template and then injects it into the HTML
 function renderCamps(data) {
   console.log(data);
   var campName = data.name;
   var description = data.description;
   var link = data.reservationUrl;
-  var amenities = "test";
-  var fees = "test";
+  var totalSites = data.campsites.totalSites
+  var showers = data.amenities.showers
+  var toilets = data.amenities.toilets
+  var water = data.amenities.potableWater
+  var reception = data.amenities.cellPhoneReception
+  var internet = data.amenities.internetConnectivity
 
-  var div = `<div class="row">
+  var div = `<div class="row" id="cards">
     <div class="col s12 m3">
       <div class="card blue-grey darken-1" id="card">
         <div class="card-content white-text">
@@ -29,10 +27,17 @@ function renderCamps(data) {
         </div>
         <div id="modal${counter}" class="modal" tabindex="0" style="z-index: 1003; display: none; opacity: 0; top: 4%; transform: scaleX(0.8) scaleY(0.8);">
           <div class="modal-content">
-            <h4>Modal Header</h4>
+            <h4>Information panel</h4>
             <p>
-              Amenities: ${amenities}, Fees: ${fees}, 
-            </p>
+            🏕️ Total campsites: ${totalSites}
+            <p>
+            <ul>
+              <li>🚿 Showers: ${showers}<li>
+              <li>🚽 Toilets: ${toilets}<li>
+              <li>🫗 Potable water: ${water}<li>
+              <li>📶 Phone reception: ${reception}<li>
+              <li>🌐 Internet connectivity: ${internet}<li>
+            <ul>
           </div>
           <div class="modal-footer">
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
@@ -47,26 +52,18 @@ function renderCamps(data) {
   myDiv.innerHTML += div;
 }
 
-// triggers the modal for its specified card
+// triggers the modal for its specified card after the information has been appended
 function modalclickhandler() {
   var elems = document.querySelectorAll(".modal");
   var instances = M.Modal.init(elems);
 }
 
-function renderWeather() {}
-
-//fetch data
-
-//loop through data
-
-//renderCamp with data
-
 ("developer.nps.gov/api/v1/campgrounds?q=test&api_key=sM8twcHp55GYlyfrURIQHjdmfOQ6au6qTedVbSya");
 
-document
-  .querySelector(".search")
-  .addEventListener("click", apiCall, clearResults);
+// event listener on search button
+document.querySelector(".search").addEventListener("click", apiCall);
 
+// fetches api data
 function apiCall() {
   var search = document.querySelector(".autocomplete").value;
   var apiKey = "e58651ace7cb758478db04f768206e08";
@@ -139,7 +136,7 @@ function getWeatherdata(url) {
 
 function campgroundData(search) {
   var url =
-    "https://developer.nps.gov/api/v1/campgrounds?q=" +
+    "https://developer.nps.gov/api/v1/campgrounds?limit=10&q=" +
     search +
     "&api_key=sM8twcHp55GYlyfrURIQHjdmfOQ6au6qTedVbSya";
   fetch(url)
@@ -148,6 +145,7 @@ function campgroundData(search) {
     })
     .then(function (data) {
       console.log(data);
+      $("#myDiv").empty();
 
       for (var i = 0; i < data.data.length; i++) {
         renderCamps(data.data[i]);
