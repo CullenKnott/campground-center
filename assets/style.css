@@ -1,3 +1,5 @@
+
+
 .banner {
   background-image: url(https://oregonisforadventure.com/wp-content/uploads/2022/02/camping-near-eugene.jpeg.webp);
   height: 700px;
@@ -7,24 +9,27 @@
 
 #bannerTitle {
   text-align: center;
+  text-shadow: 4px 3px black;
+  font-size: 90px;
   font-weight: bold;
   color: aliceblue;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
-
 .currentWeather {
-  position: absolute;
-  left: auto;
-  right: 50%;
+position: static;
 
-  
 }
 
 #sortable {
-  padding: 3px;
   margin: 10px;
-  display: inline-block;
+  display: inline-flex;
+  flex-wrap: wrap;
   color: white;
-  border-radius: 10px;  
+  border-radius: 10px;
 }
+
+.card-panel {
+  margin: 10px;
+}
+

@@ -61,6 +61,18 @@ function renderWeather() {}
 
 //renderCamp with data
 
+// adding event listener for a enter key press
+const submitButton = document.getElementById("submitButton");
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    // Prevent the default form submission behavior
+    event.preventDefault();
+    // Call the function to perform the desired action
+    apiCall();
+  }
+});
+
 ("developer.nps.gov/api/v1/campgrounds?q=test&api_key=sM8twcHp55GYlyfrURIQHjdmfOQ6au6qTedVbSya");
 
 document
@@ -98,12 +110,11 @@ function apiCall() {
 function weathernametemp(data) {
   var weatherCityName = data.name;
   var cityNameelement = document.querySelector(".weatherCardCityName");
-  cityNameelement.textContent =
-    "10 Campgrounds locations in the city of " + weatherCityName;
+  cityNameelement.textContent = weatherCityName;
   var actualTemp = data.main.temp;
   var tempElement = document.querySelector(".weatherCardTemp");
   tempElement.textContent =
-    "Temperature in " + weatherCityName + " is currently " + actualTemp + "°F ";
+    weatherCityName + " is currently " + actualTemp + "°F ";
 }
 
 function saveCityHistory() {
@@ -121,7 +132,7 @@ function renderSearchHistory() {
   var cityHistory = JSON.parse(window.localStorage.getItem("cityHistory"));
   var historyEl = document.querySelector("#sortable");
   historyEl.innerHTML = "";
-  for (var i = 0; i < cityHistory.length; i++) {
+  for (var i = 0; i < cityHistory.length && i < 10; i++) {
     console.log(cityHistory[i]);
     var displayedHistory = cityHistory[i];
     var listHistory = document.createElement("li");
@@ -140,7 +151,7 @@ function getWeatherdata(url) {
 
 function campgroundData(search) {
   var url =
-    "https://developer.nps.gov/api/v1/campgrounds?q=" +
+    "https://developer.nps.gov/api/v1/campgrounds?limit=10&q=" +
     search +
     "&api_key=sM8twcHp55GYlyfrURIQHjdmfOQ6au6qTedVbSya";
   fetch(url)
@@ -149,12 +160,18 @@ function campgroundData(search) {
     })
     .then(function (data) {
       console.log(data);
-
+      $("#myDiv").empty();
       for (var i = 0; i < data.data.length; i++) {
         renderCamps(data.data[i]);
       }
     });
 }
+
+// Clear Search History
+$("#clearButton").on("click", function () {
+  localStorage.clear();
+  renderSearchHistory();
+});
 
 // weather API
 // API KEY: e58651ace7cb758478db04f768206e08
@@ -180,7 +197,7 @@ getWeatherdata(queryURL).then(function (response) {
 
 // figure out how the api works to extract the url from data
 // if we can retrieve the link in the data
-// variable 
+// variable
 // href is equal to data. <a href="#">${link}</a>
 //  <a href="#">${link}</a> change to view campground site
 //  <a href="${link}" target = "_blank">Campsite</a>
