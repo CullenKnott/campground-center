@@ -10,48 +10,43 @@
     <link rel="stylesheet" href="./assets/style.css" />
     <title>Campground-Center</title>
   </head>
-  <!-- Header section for background image -->
-  <header class=" banner">    
-    <h1 id="bannerTitle">Campground-Center</h1>
-  </header>
-
-  <div class="row s12 m7 currentWeather">
-    <div class="col s12 m7">
-      <div class="card-panel teal currentWeather">
-        <h1 class="white-text weatherCardCityName">
-        </h1>
-        <h3 class='weatherCardTemp'></h3>   
-      </div>
-    </div>
-  </div>
 
   <body>
-    <div class="row ">
+    <!-- Header section for background image -->
+    <header class="banner">
+      <h1 id="bannerTitle">Campground-Center</h1>
+    </header>
+
+    <div class="row s12 m7 currentWeather">
+      <div class="col s12 m7">
+        <div class="card-panel teal currentWeather">
+          <h1 class="white-text">
+            Campground locations in <span class="weatherCardCityName"></span>
+          </h1>
+          <h3 class="weatherCardTemp"></h3>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="searchBox">
       <div class="col s5">
         <div class="row">
           <div class="input-field col s6">
             <input type="text" class="autocomplete" />
             <label>Search</label>
-            <button class="btn search">Search</button>
+            <button class="btn search" id="submitButton">Search</button>
+            <a id="clearButton" class="waves-effect waves-light btn-small">Clear</a>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="searchHistory">     
-      <ul id="sortable">
-      </ul>
+    <div class="searchHistory">
+      <ul id="sortable"></ul>
     </div>
 
-
-        
     <main>
-
       <div id="myDiv"></div>
-
-
     </main>
-
 
     <!-- Aside section where top 10 will populate -->
 
@@ -60,11 +55,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
-      $( function() {
-        $( "#sortable" ).sortable();
-      } );
-      </script>
-  
+      $(function () {
+        $("#sortable").sortable();
+      });
+    </script>
+
     <script src="./assets/script.js"></script>
   </body>
 
