@@ -13,16 +13,17 @@ function renderCamps(data) {
   var water = data.amenities.potableWater
   var reception = data.amenities.cellPhoneReception
   var internet = data.amenities.internetConnectivity
+  var image = data.images[0].url
 
   var div = `<div class="row" id="cards">
     <div class="col s12 m3">
-      <div class="card blue-grey darken-1" id="card">
+      <div class="card  brown darken-1" id="card">
         <div class="card-content white-text">
           <span class="card-title">${campName}</span>
           <p>${description}</p>
         </div>
         <div class="card-action">
-          <button class="waves-effect waves-light btn modal-trigger" data-target="modal${counter}" onclick="modalclickhandler()">Info</button>
+          <button class="amber darken-2 waves-effect waves-light btn modal-trigger" data-target="modal${counter}" onclick="modalclickhandler()">Info</button>
           <a href="${link}" target="_blank">Campground website</a>
         </div>
         <div id="modal${counter}" class="modal" tabindex="0" style="z-index: 1003; display: none; opacity: 0; top: 4%; transform: scaleX(0.8) scaleY(0.8);">
@@ -42,6 +43,14 @@ function renderCamps(data) {
           <div class="modal-footer">
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m8">
+      <div class="card">
+        <div class="card-image">
+          <img class="materialboxed" width="200" src="${image}">
+          <span class="card-title">${campName}</span>
         </div>
       </div>
     </div>
@@ -134,7 +143,7 @@ function renderSearchHistory() {
     var listHistory = document.createElement("li");
     listHistory.textContent = displayedHistory;
     listHistory.setAttribute("id", `list${i}`);
-    listHistory.setAttribute("class", "card-panel teal lighten-2");
+    listHistory.setAttribute("class", "card-panel amber darken-2 lighten-2");
     // historyEl.appendChild(displayedHistory);
     historyEl.appendChild(listHistory);
   }
@@ -169,6 +178,7 @@ $("#clearButton").on("click", function () {
   localStorage.clear();
   renderSearchHistory();
 });
+
 
 // weather API
 // API KEY: e58651ace7cb758478db04f768206e08
