@@ -31,7 +31,7 @@ If your README is long, add a table of contents to make it easy for users to fin
 
 Deployment Link: https://cullenknott.github.io/campground-center/
 
-![Image of Deployed Application](./assets/images/CampgroundCenterPage.png)
+![Image of Deployed Application](./assets/images/frontPage.png)
 
 ## Credits
 
